@@ -3,7 +3,25 @@ import axios from 'axios';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
-export function Grid({ users }) {
+export function Grid({ users, setUsers, setOnEdit }) {
+    
+    const handleDelete = async (id) => {
+        await axios.delete('http://localhost:8800/' + id)
+        .then(({data}) => {
+            const newArray = users.filter((user) => user.id !== id);
+
+            setUsers(newArray);
+            toast.success(data);
+        })
+        .catch(({data}) => toast.error(data));
+
+        setOnEdit(null)
+    }
+
+    const handleEdit = (user) => {
+        setOnEdit(user)
+    }
+
     return (
         <Table>
             <Thead>
@@ -22,8 +40,8 @@ export function Grid({ users }) {
                             <Td width="30%">{user.nome}</Td>
                             <Td width="30%">{user.email}</Td>
                             <Td width="30%" onlyWeb>{user.fone}</Td>
-                            <Td width="5%"><FaEdit /></Td>
-                            <Td width="5%"><FaTrash /></Td>
+                            <Td width="5%"><FaEdit onClick={() => handleEdit(user)}/></Td>
+                            <Td width="5%"><FaTrash onClick={() => handleDelete(user.id)}/></Td>
                         </Tr>
                     ))
                 }

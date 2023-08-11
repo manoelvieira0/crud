@@ -9,14 +9,16 @@ import axios from 'axios';
 const Container = styled.div`
   width: 100%;
   max-width: 80rem;
-  margin-top: 2rem;
+  margin-top: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
 `;
 
-const Title = styled.h2``;
+const Title = styled.h2`
+  margin-bottom: 1rem;
+`;
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -40,8 +42,8 @@ function App() {
       <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />
       <Container>
         <Title>Usuários</Title>
-        <Form />
-        <Grid users={users}/>
+        <Form onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>
+        <Grid users={users} setUsers={setUsers} setOnEdit={setOnEdit}/>
       </Container>
     </>
   )
