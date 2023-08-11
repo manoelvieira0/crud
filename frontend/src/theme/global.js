@@ -1,6 +1,11 @@
-import {createGlobalStyle} from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 const Global = createGlobalStyle`
+
+    html {
+        font-size: 62.5%; //10px
+    }
+
     * {
         margin: 0;
         padding: 0;
@@ -14,6 +19,11 @@ const Global = createGlobalStyle`
         display: flex;
         justify-content: center;
         background-color: #F2F2F2;
+        font-size: 1.6rem; //16px
+    }
+
+    body, button, textarea {
+        font-family: 'Poppins', sans-serif;
     }
 `;
 
